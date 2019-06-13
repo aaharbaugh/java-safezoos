@@ -1,12 +1,11 @@
 
-package com.lambdaschool.authenticatedusers;
+package com.lambdaschool.zoo;
 
-import com.lambdaschool.authenticatedusers.model.Quote;
-import com.lambdaschool.authenticatedusers.model.Role;
-import com.lambdaschool.authenticatedusers.model.User;
-import com.lambdaschool.authenticatedusers.model.UserRoles;
-import com.lambdaschool.authenticatedusers.repository.RoleRepository;
-import com.lambdaschool.authenticatedusers.repository.UserRepository;
+import com.lambdaschool.zoo.models.Role;
+import com.lambdaschool.zoo.models.User;
+import com.lambdaschool.zoo.models.UserRoles;
+import com.lambdaschool.zoo.repos.RoleRepository;
+import com.lambdaschool.zoo.repos.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,22 +14,22 @@ import java.util.ArrayList;
 
 @Transactional
 @Component
-public class SeedData implements CommandLineRunner
-{
+public class SeedData implements CommandLineRunner {
     RoleRepository rolerepos;
     UserRepository userrepos;
 
-    public SeedData(RoleRepository rolerepos, UserRepository userrepos)
-    {
+    public SeedData(RoleRepository rolerepos, UserRepository userrepos) {
         this.rolerepos = rolerepos;
         this.userrepos = userrepos;
     }
 
     @Override
-    public void run(String[] args) throws Exception
-    {
+    public void run(String[] args) throws Exception {
         Role r1 = new Role("admin");
-        Role r2 = new Role("user");
+        Role r2 = new Role("mgr");
+        Role r3 = new Role("user");
+        Role r4 = new Role("zoodata");
+        Role r5 = new Role("animaldata");
 
         ArrayList<UserRoles> admins = new ArrayList<>();
         admins.add(new UserRoles(new User(), r1));
@@ -41,6 +40,10 @@ public class SeedData implements CommandLineRunner
 
         rolerepos.save(r1);
         rolerepos.save(r2);
+        rolerepos.save(r3);
+        rolerepos.save(r4);
+        rolerepos.save(r5);
+        
         User u1 = new User("barnbarn", "ILuvM4th!", users);
 
         User u2 = new User("admin", "password", admins);
